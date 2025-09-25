@@ -1,0 +1,873 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Al Barakah Scents - Natural Islamic Perfumes & Attars</title>
+    <meta name="description" content="Premium Islamic perfumes and natural attars. Reviving the Sunnah of Fragrance with Purity and Passion.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
+        <style>
+        :root {
+            --brand-green: #1a472a;
+            --brand-green-light: #22c55e;
+            --brand-green-dark: #166534;
+            --brand-black: #000000;
+            --brand-white: #ffffff;
+            --brand-gold: #ffd700;
+        }
+
+        /* Brand Colors */
+        .brand-bg-black { background-color: var(--brand-black) !important; }
+        .brand-text-gold { color: var(--brand-gold) !important; }
+        .brand-bg-gold { background-color: var(--brand-gold) !important; }
+        .brand-text-green { color: var(--brand-green) !important; }
+        .brand-bg-green { background-color: var(--brand-green) !important; }
+        .brand-bg-green-dark { background-color: var(--brand-green-dark) !important; }
+        .text-primary { color: var(--brand-green) !important; }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: url('https://images.pexels.com/photos/10924510/pexels-photo-10924510.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 70vh;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(26, 71, 42, 0.85), rgba(22, 101, 52, 0.8));
+        }
+
+        .hero-dark-overlay {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Navigation */
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--brand-gold) !important;
+        }
+
+        .nav-link.active {
+            color: var(--brand-gold) !important;
+        }
+
+        /* Product Cards */
+        .product-card {
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            aspect-ratio: 1;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        /* Buttons */
+        .btn-add-cart {
+            background-color: var(--brand-green);
+            border-color: var(--brand-green);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--brand-green-dark);
+            border-color: var(--brand-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-explore {
+            background-color: var(--brand-gold);
+            border-color: var(--brand-gold);
+            color: #000;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-explore:hover {
+            background-color: #e6c200;
+            border-color: #e6c200;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Cart */
+        .cart-badge {
+            background-color: var(--brand-gold);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            z-index: 1055;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .cart-sidebar.show {
+            right: 0;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cart-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float i {
+            font-size: 28px;
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.8); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+
+        /* Search */
+        .search-input {
+            background-color: #2d3748 !important;
+            border-color: #4a5568 !important;
+            color: white !important;
+        }
+
+        .search-input:focus {
+            border-color: var(--brand-gold) !important;
+            box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25) !important;
+            background-color: #2d3748 !important;
+            color: white !important;
+        }
+
+        .search-input::placeholder {
+            color: #a0aec0 !important;
+        }
+
+        /* Category Pills */
+        .category-pill {
+            background-color: #f8f9fa;
+            border: 2px solid transparent;
+            color: var(--brand-green);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-pill:hover,
+        .category-pill.active {
+            background-color: var(--brand-green);
+            border-color: var(--brand-green);
+            color: white;
+        }
+
+        /* Section styling */
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--brand-gold);
+        }
+
+        /* Price styling */
+        .price-tag {
+            background: linear-gradient(45deg, var(--brand-green), var(--brand-green-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 50vh;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .whatsapp-float i {
+                font-size: 24px;
+            }
+        }
+
+        /* Text shadows for hero */
+        .hero-section h1 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero-section p {
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+
+        /* Loading animation */
+        .btn-add-cart:disabled {
+            background-color: #28a745;
+            border-color: #28a745;
+            opacity: 0.8;
+        }
+
+        /* Custom scrollbar for cart */
+        .cart-items::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .cart-items::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .cart-items::-webkit-scrollbar-thumb {
+            background: var(--brand-green);
+            border-radius: 3px;
+        }
+
+        .cart-items::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-green-dark);
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Product thumb square look */
+.product-thumb {
+    width: 100%;
+    height: 200px; /* fixed height for mobile */
+    object-fit: cover; /* crop but keep center */
+    border-radius: 8px 8px 0 0;
+}
+
+/* Card hover effect & uniform height */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* Hover effect */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Product info */
+.product-card .card-body {
+    padding: 0.8rem;
+}
+.product-card h5 {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+}
+.product-card .price {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #198754;
+}
+.product-card p.text-muted {
+    font-size: 0.85rem;
+}
+{% comment %} extracss {% endcomment %}
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Product Image */
+.product-thumb {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+/* Add to Cart Button */
+.add-to-cart-btn {
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+.add-to-cart-btn:hover {
+    background-color: #218838; /* dark green */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 128, 0, 0.3);
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark brand-bg-black sticky-top shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="bi bi-flower1 me-2 text-warning"></i>
+                Al Barakah Scents
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link brand-text-gold active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#catalog">Shop Our Collection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#contact">Contact Us</a>
+                    </li>
+                    <div class="d-flex justify-content-end">
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="input-group me-3 d-none d-md-flex" style="width: 250px;">
+                        <input type="text" class="form-control search-input bg-dark text-white border-secondary" 
+                               placeholder="Search fragrances..." id="searchInput" aria-label="Search fragrances">
+                        <button class="btn btn-outline-secondary" type="button" onclick="performSearch()" aria-label="Search">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-outline-light position-relative me-2"
+                            type="button"
+                            onclick="window.location.href='{% url 'cart_details' %}'">
+
+                        <i class="bi bi-cart3"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill cart-badge"
+                            id="cartCount">
+                            {{ cart.total_items }}
+                        </span>
+                    </button>
+                    <div class="nav-buttons">
+                            {% if user.is_authenticated %}
+                                <!-- Logged in: show My Profile button -->
+                                <a href="{% url 'profile' %}" class="btn btn-success">My Profile</a>
+                            {% else %}
+                                <!-- Not logged in: show Login & Signup buttons -->
+                                <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
+                                <a href="{% url 'signup' %}" class="btn btn-success">Signup</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float" onclick="openWhatsApp()" aria-label="Contact us on WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+<section id="home" class="hero-section d-flex align-items-center py-5">
+    <!-- Overlays -->
+    <div class="position-absolute top-0 start-0 w-100 h-100 hero-dark-overlay"></div>
+    <div class="position-absolute top-0 start-0 w-100 h-100 hero-overlay"></div>
+
+    <!-- Content -->
+    <div class="container text-center text-white position-relative px-3" style="z-index: 8;">
+        <!-- Heading -->
+        <h1 class="fw-bold mb-3 display-5 display-sm-4">
+            Welcome to Al Barakah Scents
+        </h1>
+
+        <!-- Subheading -->
+        <p class="lead fs-5 fs-sm-4 mb-3">
+            Reviving the Sunnah of Fragrance with Purity and Passion
+        </p>
+
+        <!-- Description -->
+        <p class="fs-6 fs-sm-5 mb-4 mx-auto" style="max-width: 600px;">
+            Experience the finest collection of natural attars and Islamic-inspired fragrances, 
+            crafted with the highest quality ingredients and traditional methods.
+        </p>
+
+        <!-- Buttons -->
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+            <button class="btn btn-lg btn-explore px-3 py-2" onclick="scrollToSection('catalog')">
+                <i class="bi bi-shop me-2"></i>Shop Collection
+            </button>
+            <button class="btn btn-lg btn-outline-light px-3 py-2" onclick="scrollToSection('contact')">
+                <i class="bi bi-envelope me-2"></i>Contact Us
+            </button>
+        </div>
+    </div>
+</section>
+
+        
+       <!-- Product Catalog -->
+<section id="catalog" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold brand-text-green section-title mb-4">Complete Catalog</h2>
+            <p class="lead text-muted">Browse our entire collection of premium attars and fragrances</p>
+        </div>
+
+<!-- Category Filter -->
+<div class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+    <a href="?category=all" class="btn category-pill {% if not current_category or current_category == 'all' %}active{% endif %}">All Products</a>
+    {% for category in categories %}
+        <a href="?category={{ category.slug }}" class="btn category-pill {% if current_category == category.slug %}active{% endif %}">
+            {{ category.name }}
+        </a>
+    {% endfor %}
+</div>
+
+<!-- Product Grid -->
+<div class="row g-3" id="productGrid">
+    {% for product in products %}
+    <div class="col-6 col-md-4 col-lg-3 d-flex">
+        <div class="card product-card w-100 d-flex flex-column">
+            <a href="{{ product.get_absolute_url }}">
+                {% with product.images.first as img %}
+                    {% if img %}
+                        <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="product-thumb">
+                    {% else %}
+                        <img src="{% static 'images/placeholder.png' %}" alt="placeholder" class="product-thumb">
+                    {% endif %}
+                {% endwith %}
+            </a>
+
+            <!-- Card body -->
+            <div class="card-body text-start flex-grow-1">
+                <!-- Name Green + Bold -->
+                <h5 class="card-title fw-bold text-success">{{ product.name }}</h5>
+
+                <!-- Description muted -->
+                <p class="text-muted small mb-2">{{ product.description|truncatewords:15 }}</p>
+
+                <!-- Price Black + Bold -->
+                <p class="price fw-bold text-dark">PKR {{ product.price }}</p>
+            </div>
+
+            <!-- Button at bottom -->
+            <div class="card-footer bg-white border-0">
+                <button class="add-to-cart-btn btn btn-success w-100" data-product-id="{{ product.id }}">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+</section>
+
+        <!-- About Section -->
+        <section id="about" class="py-5 bg-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Text Column -->
+            <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
+                <h2 class="display-5 fw-bold brand-text-green section-title mb-4">
+                    About Al Barakah Scents
+                </h2>
+                <div class="bg-light rounded-3 p-4 mb-4">
+                    <blockquote class="blockquote text-center mb-0">
+                        <p class="fs-5 fst-italic brand-text-green fw-bold">
+                            "Reviving the Sunnah of Fragrance with Purity and Passion."
+                        </p>
+                    </blockquote>
+                </div>
+                <p class="lead mb-3">
+                    At Al Barakah Scents, we are dedicated to reviving the blessed tradition of using natural fragrances 
+                    as practiced by our beloved Prophet Muhammad (peace be upon him).
+                </p>
+                <p class="mb-4">
+                    Our mission is to provide you with the purest, most authentic Islamic fragrances that connect you 
+                    to this beautiful Sunnah. Every bottle represents our commitment to quality, authenticity, and 
+                    the Islamic values of purity and excellence.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+                    <button class="btn btn-warning" onclick="scrollToSection('catalog')">
+                        <i class="bi bi-shop me-2"></i>Shop Now
+                    </button>
+                    <button class="btn btn-outline-primary" onclick="scrollToSection('contact')">
+                        <i class="bi bi-envelope me-2"></i>Contact Us
+                    </button>
+                </div>
+            </div>
+
+            <!-- Image Column -->
+            <div class="col-lg-6 text-center text-lg-end">
+                <img src="https://images.pexels.com/photos/8450395/pexels-photo-8450395.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                     alt="Traditional Attar Making" class="img-fluid rounded-3 shadow-lg" style="max-width:100%; height:auto;">
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5 brand-bg-green text-white">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title mb-4">Contact Us</h2>
+                    <p class="lead">We'd love to hear from you. Get in touch with our team!</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card bg-white text-dark mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title brand-text-green">
+                                    <i class="bi bi-telephone me-2"></i>Phone
+                                </h5>
+                                <p class="card-text fs-5 fw-bold">03470105539</p>
+                                <small class="text-muted">Available 9 AM - 9 PM (PKT)</small>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-white text-dark mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title brand-text-green">
+                                    <i class="bi bi-envelope me-2"></i>Email
+                                </h5>
+                                <p class="card-text fs-5 fw-bold">albarakahscents@gmail.com</p>
+                                <small class="text-muted">We'll respond within 24 hours</small>
+                            </div>
+                        </div>
+
+                        <div class="card bg-white text-dark">
+                            <div class="card-body">
+                                <h5 class="card-title brand-text-green">
+                                    <i class="bi bi-whatsapp me-2"></i>WhatsApp
+                                </h5>
+                                <p class="card-text fs-5 fw-bold">+92 347 0105539</p>
+                                <button class="btn btn-success" onclick="openWhatsApp()">
+                                    <i class="bi bi-whatsapp me-2"></i>Chat with us
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header brand-bg-green-dark text-white">
+                                <h4 class="mb-0">
+                                    <i class="bi bi-send me-2"></i>Send Message
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                            <form id="contactForm">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="contactName" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="contactName" name="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactEmail" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="contactEmail" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactMessage" class="form-label">Message *</label>
+                                    <textarea class="form-control" id="contactMessage" name="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn brand-bg-green text-white w-100">
+                                    <i class="bi bi-send me-2"></i>Send Message
+                                </button>
+                            </form>
+                            <div id="formMessage" class="mt-3"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Reviews -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center brand-text-green fw-bold mb-5 section-title">What Our Customers Say</h2>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <p class="card-text fst-italic">"Exceptional quality! The Rose Damascus is divine and long-lasting."</p>
+                                <footer class="text-muted">- Fatima Ahmed</footer>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <p class="card-text fst-italic">"Natural fragrances that follow the Sunnah. Highly recommend!"</p>
+                                <footer class="text-muted">- Muhammad Hassan</footer>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <p class="card-text fst-italic">"Beautiful packaging and authentic scents. Fast delivery too!"</p>
+                                <footer class="text-muted">- Aisha Khan</footer>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <p class="card-text fst-italic">"Excellent customer service and premium quality attars."</p>
+                                <footer class="text-muted">- Omar Ali</footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="brand-bg-black text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h3 class="fw-bold mb-3">
+                        <i class="bi bi-flower1 me-2 text-warning"></i>
+                        Al Barakah Scents
+                    </h3>
+                    <p class="mb-3">Reviving the Sunnah of Fragrance with Purity and Passion.</p>
+                    <p>Experience the finest collection of natural attars and Islamic-inspired fragrances.</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="text-light fs-4" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-light fs-4" onclick="openWhatsApp()" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                        <a href="#" class="text-light fs-4" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-light fs-4" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-2">
+                    <h5 class="fw-semibold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-decoration-none text-light">Home</a></li>
+                        <li class="mb-2"><a href="#catalog" class="text-decoration-none text-light">Catalog</a></li>
+                        <li class="mb-2"><a href="#about" class="text-decoration-none text-light">About Us</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-decoration-none text-light">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-semibold mb-3">Categories</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><button class="btn btn-link text-light p-0" onclick="filterProducts('popular')">Popular Attars</button></li>
+                        <li class="mb-2"><button class="btn btn-link text-light p-0" onclick="filterProducts('male')">For Men</button></li>
+                        <li class="mb-2"><button class="btn btn-link text-light p-0" onclick="filterProducts('female')">For Women</button></li>
+                        <li class="mb-2"><button class="btn btn-link text-light p-0" onclick="filterProducts('premium')">Premium Collection</button></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3">
+                    <h5 class="fw-semibold mb-3">Contact Info</h5>
+                    <p class="mb-2"><i class="bi bi-telephone me-2"></i>03470105539</p>
+                    <p class="mb-2"><i class="bi bi-envelope me-2"></i>albarakahscents@gmail.com</p>
+                    <p class="mb-3"><i class="bi bi-whatsapp me-2"></i>+92 347 0105539</p>
+                    <button class="btn btn-success btn-sm" onclick="openWhatsApp()">
+                        <i class="bi bi-whatsapp me-2"></i>Quick Order
+                    </button>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">© 2025 Al Barakah Scents. All Rights Reserved. | Made with ❤️ for the Ummah</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const cartCountEl = document.getElementById("cartCount");
+    let cartCount = 0;
+
+    // Add to cart button logic
+    document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            cartCount++;
+            cartCountEl.textContent = cartCount;
+            this.classList.remove("btn-success");
+            this.classList.add("btn-warning");
+            this.textContent = `Added (${cartCount})`;
+        });
+    });
+
+    // WhatsApp function
+    window.openWhatsApp = function () {
+        const phoneNumber = '923470105539';
+        const message = encodeURIComponent('Assalamu Alaikum! I\'m interested in your natural attars and fragrances. Can you please help me with my order?');
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+        window.open(whatsappURL, '_blank');
+    }
+
+    // Contact form AJAX submit
+    const contactForm = document.getElementById('contactForm');
+    if(contactForm){
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const csrfToken = this.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            fetch("{% url 'contact' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('formMessage').innerHTML =
+                    `<div class="alert alert-success">${data.message}</div>`;
+                this.reset();
+            })
+            .catch(err => {
+                document.getElementById('formMessage').innerHTML =
+                    `<div class="alert alert-danger">Something went wrong.</div>`;
+                console.error(err);
+            });
+        });
+    }
+});
+</script>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

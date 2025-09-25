@@ -1,0 +1,310 @@
+        :root {
+            --brand-green: #1a472a;
+            --brand-green-light: #22c55e;
+            --brand-green-dark: #166534;
+            --brand-black: #000000;
+            --brand-white: #ffffff;
+            --brand-gold: #ffd700;
+        }
+
+        /* Brand Colors */
+        .brand-bg-black { background-color: var(--brand-black) !important; }
+        .brand-text-gold { color: var(--brand-gold) !important; }
+        .brand-bg-gold { background-color: var(--brand-gold) !important; }
+        .brand-text-green { color: var(--brand-green) !important; }
+        .brand-bg-green { background-color: var(--brand-green) !important; }
+        .brand-bg-green-dark { background-color: var(--brand-green-dark) !important; }
+        .text-primary { color: var(--brand-green) !important; }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: url('https://images.pexels.com/photos/10924510/pexels-photo-10924510.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 70vh;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(26, 71, 42, 0.85), rgba(22, 101, 52, 0.8));
+        }
+
+        .hero-dark-overlay {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Navigation */
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--brand-gold) !important;
+        }
+
+        .nav-link.active {
+            color: var(--brand-gold) !important;
+        }
+
+        /* Product Cards */
+        .product-card {
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            aspect-ratio: 1;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        /* Buttons */
+        .btn-add-cart {
+            background-color: var(--brand-green);
+            border-color: var(--brand-green);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--brand-green-dark);
+            border-color: var(--brand-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-explore {
+            background-color: var(--brand-gold);
+            border-color: var(--brand-gold);
+            color: #000;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-explore:hover {
+            background-color: #e6c200;
+            border-color: #e6c200;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Cart */
+        .cart-badge {
+            background-color: var(--brand-gold);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            z-index: 1055;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .cart-sidebar.show {
+            right: 0;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cart-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float i {
+            font-size: 28px;
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.8); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+
+        /* Search */
+        .search-input {
+            background-color: #2d3748 !important;
+            border-color: #4a5568 !important;
+            color: white !important;
+        }
+
+        .search-input:focus {
+            border-color: var(--brand-gold) !important;
+            box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25) !important;
+            background-color: #2d3748 !important;
+            color: white !important;
+        }
+
+        .search-input::placeholder {
+            color: #a0aec0 !important;
+        }
+
+        /* Category Pills */
+        .category-pill {
+            background-color: #f8f9fa;
+            border: 2px solid transparent;
+            color: var(--brand-green);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-pill:hover,
+        .category-pill.active {
+            background-color: var(--brand-green);
+            border-color: var(--brand-green);
+            color: white;
+        }
+
+        /* Section styling */
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--brand-gold);
+        }
+
+        /* Price styling */
+        .price-tag {
+            background: linear-gradient(45deg, var(--brand-green), var(--brand-green-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 50vh;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .whatsapp-float i {
+                font-size: 24px;
+            }
+        }
+
+        /* Text shadows for hero */
+        .hero-section h1 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero-section p {
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+
+        /* Loading animation */
+        .btn-add-cart:disabled {
+            background-color: #28a745;
+            border-color: #28a745;
+            opacity: 0.8;
+        }
+
+        /* Custom scrollbar for cart */
+        .cart-items::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .cart-items::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .cart-items::-webkit-scrollbar-thumb {
+            background: var(--brand-green);
+            border-radius: 3px;
+        }
+
+        .cart-items::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-green-dark);
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }

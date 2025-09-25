@@ -1,0 +1,222 @@
+:root {
+            --brand-green: #1a472a;
+            --brand-green-light: #22c55e;
+            --brand-green-dark: #166534;
+            --brand-black: #000000;
+            --brand-white: #ffffff;
+            --brand-gold: #ffd700;
+            --primary: #1a472a;
+        }
+
+        /* Brand Colors */
+        .brand-bg-black { background-color: var(--brand-black) !important; }
+        .brand-text-gold { color: var(--brand-gold) !important; }
+        .brand-bg-gold { background-color: var(--brand-gold) !important; }
+        .brand-text-green { color: var(--brand-green) !important; }
+        .brand-bg-green { background-color: var(--brand-green) !important; }
+        .brand-bg-green-dark { background-color: var(--brand-green-dark) !important; }
+        .text-primary { color: var(--brand-green) !important; }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: url('https://images.pexels.com/photos/10924510/pexels-photo-10924510.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 60vh;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(26, 71, 42, 0.8), rgba(22, 101, 52, 0.7));
+        }
+
+        .hero-dark-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Navigation */
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--brand-gold) !important;
+        }
+
+        .nav-link.active {
+            color: var(--brand-gold) !important;
+        }
+
+        /* Product Cards */
+        .product-card {
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .product-image {
+            aspect-ratio: 1;
+            background-color: #f8f9fa;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn-add-cart {
+            background-color: var(--brand-green);
+            border-color: var(--brand-green);
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-cart:hover {
+            background-color: var(--brand-green-dark);
+            border-color: var(--brand-green-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-explore {
+            background-color: var(--brand-gold);
+            border-color: var(--brand-gold);
+            color: #000;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-explore:hover {
+            background-color: #e6c200;
+            border-color: #e6c200;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Cart */
+        .cart-badge {
+            background-color: var(--brand-gold);
+            color: #000;
+            font-size: 0.75rem;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            z-index: 1050;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .cart-sidebar.show {
+            right: 0;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1040;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cart-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Search */
+        .search-input {
+            background-color: #2d3748 !important;
+            border-color: #4a5568 !important;
+            color: white !important;
+        }
+
+        .search-input:focus {
+            border-color: var(--brand-gold) !important;
+            box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25) !important;
+            background-color: #2d3748 !important;
+            color: white !important;
+        }
+
+        .search-input::placeholder {
+            color: #a0aec0 !important;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 50vh;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .display-1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                min-height: 40vh;
+            }
+            
+            .display-1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Text shadows for hero */
+        .hero-section h1 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .hero-section p {
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+        /* Loading animation */
+        .btn-add-cart:disabled {
+            background-color: #28a745;
+            border-color: #28a745;
+            opacity: 0.8;
+        }
+
+        /* Custom scrollbar for cart */
+        .cart-items::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .cart-items::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .cart-items::-webkit-scrollbar-thumb {
+            background: var(--brand-green);
+            border-radius: 3px;
+        }
+
+        .cart-items::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-green-dark);
+        }

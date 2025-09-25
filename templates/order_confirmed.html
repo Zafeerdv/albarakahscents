@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Barakah Scents - Order Confirmed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
+    <style>
+        :root {
+            --brand-green: #1a472a;
+            --brand-green-light: #22c55e;
+            --brand-green-dark: #166534;
+            --brand-black: #000000;
+            --brand-white: #ffffff;
+            --brand-gold: #ffd700;
+        }
+
+        body {
+            background-color: #f0fdf4;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        .brand-bg-green { background-color: var(--brand-green) !important; }
+        .brand-text-green { color: var(--brand-green) !important; }
+        .brand-text-gold { color: var(--brand-gold) !important; }
+        .brand-bg-gold { background-color: var(--brand-gold) !important; }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--brand-gold);
+        }
+
+        .confirmation-card {
+            max-width: 600px;
+            margin: 50px auto;
+            background: var(--brand-white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-icon {
+            font-size: 4rem;
+            color: var(--brand-green);
+        }
+
+        .order-summary-box {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .btn-continue {
+            background-color: var(--brand-green);
+            border-color: var(--brand-green);
+            color: var(--brand-white);
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-continue:hover {
+            background-color: var(--brand-green-dark);
+            border-color: var(--brand-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(26, 71, 42, 0.3);
+        }
+
+        .order-id-copy {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .order-id-copy:hover {
+            color: var(--brand-gold);
+        }
+    </style>
+</head>
+<body>
+    <main class="container py-5">
+        <div class="confirmation-card text-center">
+            <i class="bi bi-check-circle status-icon mb-3"></i>
+            <h2 class="display-5 fw-bold brand-text-green section-title mb-4">Order Confirmed!</h2>
+            
+            <p class="lead text-muted mb-4">
+                Thank you for your purchase, **{{ user.username|default:"Customer" }}**!
+                Your order **#{{ order.id }}** has been successfully placed.
+            </p>
+
+            <div class="alert brand-bg-green text-white mb-4" role="alert">
+                <i class="bi bi-truck me-2"></i> We'll send you a confirmation email with tracking details shortly.
+            </div>
+
+            <div class="order-summary-box text-start mb-4">
+                <h4 class="fw-bold mb-3 brand-text-green">Order Summary</h4>
+                <ul class="list-group list-group-flush mb-3">
+                    {% for item in order.items.all %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+                        <div>
+                            {{ item.product.name }}
+                            <small class="text-muted d-block">x{{ item.quantity }}</small>
+                        </div>
+                        <span class="fw-bold">PKR {{ item.total_price|floatformat:2 }}</span>
+                    </li>
+                    {% endfor %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+                        <strong>Shipping:</strong>
+                        <span class="fw-bold">PKR 0.00</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent">
+                        <strong>Grand Total:</strong>
+                        <span class="fs-5 fw-bold brand-text-green">PKR {{ order.total_price|floatformat:2 }}</span>
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                    <small class="text-muted">Order ID: <span id="order-id">{{ order.id }}</span></small>
+                    <button class="btn btn-sm btn-outline-secondary order-id-copy" onclick="copyOrderId()">
+                        <i class="bi bi-clipboard"></i> Copy
+                    </button>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <a href="{% url 'home' %}" class="btn btn-continue">
+                    <i class="bi bi-shop me-2"></i> Continue Shopping
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function copyOrderId() {
+            const orderIdText = document.getElementById('order-id').innerText;
+            navigator.clipboard.writeText(orderIdText).then(() => {
+                alert('Order ID copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
